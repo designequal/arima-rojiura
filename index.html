@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STORE_DESCRIPTION">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="STORE_NAME">
+  <meta property="og:description" content="STORE_DESCRIPTION">
+  <meta property="og:image" content="assets/images/ogp.webp">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>STORE_NAME</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "STORE_NAME",
+    "description": "STORE_DESCRIPTION",
+    "url": "STORE_CANONICAL_URL",
+    "telephone": "STORE_PHONE",
+    "image": ["STORE_CANONICAL_URL/assets/images/ogp.webp"],
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "STORE_POSTAL_CODE",
+      "addressRegion": "STORE_PREFECTURE",
+      "addressLocality": "STORE_CITY",
+      "streetAddress": "STORE_STREET_ADDRESS",
+      "addressCountry": "JP"
+    }
+  }
+  </script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">本文へ移動</a>
+
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner container">
+      <a class="site-logo" href="#top" aria-label="STORE_NAME トップへ">STORE_NAME</a>
+      <nav class="desktop-nav" aria-label="メインナビゲーション">
+        <a href="#news">News</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#access">Access</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="site-header__actions">
+        <a class="header-phone" href="tel:STORE_PHONE_DIGITS">TEL</a>
+        <a class="button button--primary header-reservation" href="STORE_RESERVATION_URL" target="_blank" rel="noopener noreferrer">予約</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="メニューを開く">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav-backdrop" data-mobile-nav-backdrop hidden></div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="モバイルナビゲーション" aria-hidden="true">
+      <a href="#news">News</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#access">Access</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:STORE_PHONE_DIGITS">電話する</a>
+      <a href="STORE_RESERVATION_URL" target="_blank" rel="noopener noreferrer">予約する</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <img class="hero__media" src="assets/images/hero.webp" alt="" width="1600" height="1000" fetchpriority="high">
+      <div class="hero__overlay"></div>
+      <div class="hero__content container">
+        <p class="hero__eyebrow">STORE_ENGLISH_SUBCOPY</p>
+        <h1 class="hero__title" id="hero-title"><span class="u-phrase">STORE_CATCH_PHRASE_1</span><br><span class="u-phrase">STORE_CATCH_PHRASE_2</span></h1>
+      </div>
+    </section>
+
+    <section class="section" id="news" aria-labelledby="news-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-heading__en">News</p>
+          <h2 id="news-title">お知らせ</h2>
+          <span class="section-heading__line" aria-hidden="true"></span>
+        </header>
+        <div class="instagram-latest" data-instagram-latest aria-live="polite"></div>
+        <p class="section-action"><a class="text-link" href="posts.html">すべての記事を見る</a></p>
+      </div>
+    </section>
+
+    <section class="section section--muted" id="about" aria-labelledby="about-title">
+      <div class="container split-layout">
+        <div>
+          <header class="section-heading">
+            <p class="section-heading__en">About</p>
+            <h2 id="about-title"><span class="u-phrase">STORE_ABOUT_HEADING_1</span><span class="u-phrase">STORE_ABOUT_HEADING_2</span></h2>
+            <span class="section-heading__line" aria-hidden="true"></span>
+          </header>
+          <div class="prose">
+            <p>STORE_ABOUT_TEXT</p>
+          </div>
+        </div>
+        <figure class="media-frame">
+          <img src="assets/images/about.webp" alt="STORE_ABOUT_IMAGE_ALT" width="960" height="720" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="menu" aria-labelledby="menu-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-heading__en">Menu</p>
+          <h2 id="menu-title">メニュー</h2>
+          <span class="section-heading__line" aria-hidden="true"></span>
+        </header>
+        <div class="menu-grid">
+          <!-- research.mdで確認済みのメニューだけを追加してください。 -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--muted" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-heading__en">Gallery</p>
+          <h2 id="gallery-title">ギャラリー</h2>
+          <span class="section-heading__line" aria-hidden="true"></span>
+        </header>
+        <div class="gallery-grid">
+          <img src="assets/images/gallery-01.webp" alt="STORE_GALLERY_ALT_1" width="900" height="1200" loading="lazy" decoding="async">
+          <img src="assets/images/gallery-02.webp" alt="STORE_GALLERY_ALT_2" width="1200" height="900" loading="lazy" decoding="async">
+          <img src="assets/images/gallery-03.webp" alt="STORE_GALLERY_ALT_3" width="1200" height="900" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="access" aria-labelledby="access-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-heading__en">Access</p>
+          <h2 id="access-title">店舗情報・アクセス</h2>
+          <span class="section-heading__line" aria-hidden="true"></span>
+        </header>
+        <div class="access-layout">
+          <dl class="store-info">
+            <div><dt>店名</dt><dd>STORE_NAME</dd></div>
+            <div><dt>住所</dt><dd>STORE_ADDRESS</dd></div>
+            <div><dt>電話</dt><dd><a href="tel:STORE_PHONE_DIGITS">STORE_PHONE</a></dd></div>
+            <div><dt>営業時間</dt><dd>STORE_BUSINESS_HOURS</dd></div>
+            <div><dt>定休日</dt><dd>STORE_CLOSED_DAYS</dd></div>
+            <div><dt>支払方法</dt><dd>STORE_PAYMENT_METHODS</dd></div>
+          </dl>
+          <div class="map-embed" aria-label="店舗周辺地図">
+            <!-- 確認済み住所のGoogle Maps埋め込みコードへ差し替えてください。 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-block">
+        <header class="section-heading section-heading--light">
+          <p class="section-heading__en">Contact</p>
+          <h2 id="contact-title">お問い合わせ・ご予約</h2>
+          <span class="section-heading__line" aria-hidden="true"></span>
+        </header>
+        <p>STORE_CONTACT_TEXT</p>
+        <div class="contact-actions">
+          <a class="button button--light" href="tel:STORE_PHONE_DIGITS">STORE_PHONE</a>
+          <a class="button button--outline-light" href="STORE_RESERVATION_URL" target="_blank" rel="noopener noreferrer">オンライン予約</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <p class="site-footer__brand">STORE_NAME</p>
+        <p>STORE_ADDRESS</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="STORE_INSTAGRAM_URL" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <button class="link-button" type="button" data-open-privacy>プライバシーポリシー</button>
+      </div>
+    </div>
+    <p class="copyright">Copyright © DesignEqual</p>
+  </footer>
+
+  <button class="back-to-top" type="button" data-back-to-top aria-label="ページトップへ戻る">↑</button>
+
+  <dialog class="privacy-dialog" id="privacy-dialog" aria-labelledby="privacy-title">
+    <div class="privacy-dialog__inner">
+      <div class="privacy-dialog__header">
+        <h2 id="privacy-title">プライバシーポリシー</h2>
+        <button type="button" data-close-privacy aria-label="閉じる">×</button>
+      </div>
+      <div class="prose">
+        <p>STORE_PRIVACY_POLICY_TEXT</p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
