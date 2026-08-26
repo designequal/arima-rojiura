@@ -1,0 +1,7 @@
+{
+  "apiVersion": "v25.0",
+  "sourceInstagramUserId": "SET_SOURCE_INSTAGRAM_PRO_ACCOUNT_ID",
+  "targetUsername": "SET_TARGET_USERNAME_WITHOUT_AT",
+  "syncLimit": 100,
+  "imageMaxWidth": 1600
+}
