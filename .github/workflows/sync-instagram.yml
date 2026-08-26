@@ -1,0 +1,51 @@
+name: Sync Instagram posts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 0 * * *" # 09:17 JST
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-instagram
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package.json
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Sync Instagram posts
+        env:
+          INSTAGRAM_GRAPH_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_GRAPH_ACCESS_TOKEN }}
+        run: npm run sync:instagram
+
+      - name: Commit changed archive
+        shell: bash
+        run: |
+          if git diff --quiet -- assets/data/instagram-posts.json assets/images/instagram-feed; then
+            echo "No Instagram changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/instagram-posts.json assets/images/instagram-feed
+          git commit -m "chore: sync Instagram posts"
+          git push
