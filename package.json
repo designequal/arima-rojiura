@@ -1,0 +1,11 @@
+{
+  "name": "designequal-restaurant-site-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:instagram": "node tools/sync-instagram-graph.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
+  }
+}
