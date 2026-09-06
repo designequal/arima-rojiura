@@ -1,9 +1,13 @@
 name: Sync Instagram posts
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "17 0 * * *" # 09:17 JST
+# Disabled in this template repository.
+# Uncomment the original triggers below when using this workflow in a generated site.
+#
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: "17 0 * * *" # 09:17 JST
+on: []
 
 permissions:
   contents: write
