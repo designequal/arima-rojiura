@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check:instagram": "node tools/check-instagram-graph.mjs",
     "sync:instagram": "node tools/sync-instagram-graph.mjs"
   },
   "dependencies": {

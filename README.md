@@ -12,6 +12,7 @@
 - `posts.html` / `post.html` — 保存済みInstagram投稿の一覧・詳細
 - `assets/data/instagram-posts.json` — サイトに掲載する投稿本文・日時・リンク
 - `config/instagram-journal.json` — Instagram同期対象の公開設定（秘密情報は置かない）
+- `tools/check-instagram-graph.mjs` — Secret・source ID・対象ユーザー・投稿取得を事前確認
 - `tools/sync-instagram-graph.mjs` — Meta Instagram Graph APIから投稿と画像を同期
 - `.github/workflows/sync-instagram.yml` — 毎日09:17（日本時間）の同期と差分push
 - `assets/` — ブランドマーク、OGP、店舗画像、アイコン、同期済みInstagram画像
@@ -52,8 +53,9 @@ npx serve .
 
 1. `config/instagram-journal.json` の対象アカウント設定を確認する。
 2. GitHubの **Settings → Secrets and variables → Actions** で、`INSTAGRAM_GRAPH_ACCESS_TOKEN` を登録する。
-3. **Actions → Sync Instagram posts → Run workflow** を一度実行する。
-4. `assets/data/instagram-posts.json`、`assets/images/instagram-feed/`、投稿一覧・詳細ページを確認する。
+3. Secret名が一覧にあるだけで完了にせず、`npm run check:instagram` または手動workflowで値が実行環境へ渡ることを確認する。
+4. **Actions → Sync Instagram posts → Run workflow** を一度実行する。
+5. `assets/data/instagram-posts.json`、`assets/images/instagram-feed/`、投稿一覧・詳細ページを確認する。
 
 トークンはGitやサイトのファイルに保存しません。同期に失敗しても、すでに保存された記事と画像は残す設計です。
 
@@ -75,6 +77,8 @@ npx serve .
 公開プロアカウント（ビジネス / クリエイター）を対象に、Meta Instagram Graph API / Business Discoveryを利用します。対象店のログイン情報やブラウザCookieは使用しません。
 
 `config/instagram-journal.json` には秘密情報を保存せず、アクセストークンはGitHub Actions Secretだけで管理してください。
+
+`sourceInstagramUserId` はAPIを実行する運営側InstagramプロアカウントのIDです。`targetUsername` は投稿を取得する店舗のユーザーネームで、両者を混同しないでください。対象店舗の公開プロフィールから数値IDを確認できた場合は、照合用に `targetInstagramUserId` へ保存しますが、認証情報の代わりにはなりません。
 
 ## ライセンス・表記
 

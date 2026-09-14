@@ -29,13 +29,16 @@ npx serve .
 7. キーボード操作、Esc、フォーカス表示、モバイルメニューを確認する。
 8. Lighthouseと構造化データを検証する。
 9. OGPを実URLで確認する。
-10. Instagram同期を使う場合は手動workflowを1回成功させる。
+10. `assets/images/favicon.svg` が存在し、全HTMLから200で読み込めることを確認する。
+11. Instagram同期を使う場合は手動workflowを1回成功させる。
 
 ## GitHub Actions Secret
 
 Instagram同期を有効にする場合のみ、GitHubの **Settings → Secrets and variables → Actions** に以下を登録します。
 
 - `INSTAGRAM_GRAPH_ACCESS_TOKEN`
+
+Secret名が一覧に存在しても値が空の場合はActionsへ空文字が渡されます。同期ジョブの最初にSecretの空チェックを行い、空ならGraph APIを呼ばずに失敗させます。トークン値はログへ出力しません。
 
 アクセストークンをソースコード、JSON、Markdown、コミット履歴へ保存しないでください。
 

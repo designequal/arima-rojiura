@@ -50,13 +50,16 @@ apiUrl.searchParams.set('access_token', token);
 
 const apiResponse = await fetch(apiUrl, { headers: { accept: 'application/json' } });
 const apiJson = await apiResponse.json().catch(() => ({}));
-if (!apiResponse.ok) {
-  const detail = apiJson?.error?.message || `${apiResponse.status} ${apiResponse.statusText}`;
+if (!apiResponse.ok || apiJson?.error) {
+  const error = apiJson?.error;
+  const detail = error
+    ? `${error.type ?? 'Graph API error'}: ${error.message ?? 'unknown'} (code=${error.code ?? '?'})`
+    : `${apiResponse.status} ${apiResponse.statusText}`;
   throw new Error(`Instagram Graph API error: ${detail}`);
 }
 
 const media = apiJson?.business_discovery?.media?.data;
-if (!Array.isArray(media)) {
+if (!Array.isArray(media) || media.length === 0) {
   throw new Error('Business Discoveryのmediaデータを取得できませんでした。対象が公開プロアカウントか確認してください。');
 }
 

@@ -2,6 +2,7 @@
   "apiVersion": "v25.0",
   "sourceInstagramUserId": "17841465674034182",
   "targetUsername": "SET_TARGET_USERNAME_WITHOUT_AT",
+  "targetInstagramUserId": "",
   "syncLimit": 100,
   "imageMaxWidth": 1600
 }
