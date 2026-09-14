@@ -16,6 +16,32 @@
     }).format(date).replaceAll('/', '.');
   };
 
+  const formatJournalDate = (value) => {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Tokyo',
+      month: '2-digit',
+      day: '2-digit'
+    }).formatToParts(date);
+    const month = parts.find((part) => part.type === 'month')?.value;
+    const day = parts.find((part) => part.type === 'day')?.value;
+    return month && day ? `${month} / ${day}` : '';
+  };
+
+  const formatJournalTime = (value) => {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Tokyo',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }).format(date).replace(' ', '. ');
+  };
+
   const excerpt = (text, max = 46) => {
     const normalized = String(text ?? '').replace(/\s+/g, ' ').trim();
     if (!normalized) return 'Instagram投稿';
@@ -63,6 +89,86 @@
     return article;
   };
 
+  const createJournalSlide = (post, index) => {
+    const panel = document.createElement('article');
+    panel.className = 'journal-feature';
+    panel.id = `journal-panel-${index}`;
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-label', `${index + 1}件目の投稿`);
+
+    const imagePath = firstImage(post);
+    const imageWrap = document.createElement('div');
+    imageWrap.className = 'journal-feature__media';
+    if (imagePath) {
+      const image = document.createElement('img');
+      image.src = imagePath;
+      image.alt = '';
+      image.width = 1200;
+      image.height = 1200;
+      image.decoding = 'async';
+      imageWrap.append(image);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'journal-feature__body';
+    const label = document.createElement('p');
+    label.className = 'journal-feature__label';
+    label.textContent = 'LATEST JOURNAL';
+    const date = document.createElement('time');
+    date.className = 'journal-feature__date';
+    date.dateTime = post.timestamp || '';
+    date.textContent = formatDate(post.timestamp);
+    const title = document.createElement('h3');
+    title.textContent = post.title || excerpt(post.caption, 62);
+    const description = document.createElement('p');
+    description.className = 'journal-feature__description';
+    description.textContent = excerpt(post.caption, 230);
+    const link = document.createElement('a');
+    link.className = 'journal-feature__link';
+    link.href = `post.html?post=${encodeURIComponent(post.id)}`;
+    link.textContent = '投稿を読む';
+    body.append(label, date, title, description, link);
+    panel.append(imageWrap, body);
+    return panel;
+  };
+
+  const createJournalControl = (post, index) => {
+    const button = document.createElement('button');
+    button.className = 'journal-control';
+    button.type = 'button';
+    button.setAttribute('role', 'tab');
+    button.setAttribute('aria-controls', `journal-panel-${index}`);
+    button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+    button.tabIndex = index === 0 ? 0 : -1;
+
+    const date = document.createElement('time');
+    date.className = 'journal-control__date';
+    date.dateTime = post.timestamp || '';
+    date.textContent = formatJournalDate(post.timestamp);
+    const time = document.createElement('span');
+    time.className = 'journal-control__time';
+    time.textContent = formatJournalTime(post.timestamp);
+    const imagePath = firstImage(post);
+    const imageWrap = document.createElement('span');
+    imageWrap.className = 'journal-control__media';
+    if (imagePath) {
+      const image = document.createElement('img');
+      image.src = imagePath;
+      image.alt = '';
+      image.width = 600;
+      image.height = 600;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      imageWrap.append(image);
+    }
+    const title = document.createElement('span');
+    title.className = 'journal-control__title';
+    title.textContent = post.title || excerpt(post.caption, 42);
+    button.setAttribute('aria-label', `${date.textContent} ${title.textContent}を表示`);
+    button.append(date, time, imageWrap, title);
+    return button;
+  };
+
   const loadPosts = async () => {
     const response = await fetch('assets/data/instagram-posts.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`Instagram data request failed: ${response.status}`);
@@ -80,9 +186,42 @@
         target.innerHTML = '<p class="empty-state">現在、掲載済みの記事はありません。</p>';
         return;
       }
-      const fragment = document.createDocumentFragment();
-      posts.slice(0, 10).forEach((post) => fragment.append(createPostCard(post)));
-      target.replaceChildren(fragment);
+      const journalPosts = posts.slice(0, 6);
+      const main = document.createElement('div');
+      main.className = 'journal-main';
+      const controls = document.createElement('div');
+      controls.className = 'journal-controls';
+      controls.setAttribute('role', 'tablist');
+      controls.setAttribute('aria-label', '表示する投稿を選ぶ');
+      const slides = journalPosts.map((post, index) => createJournalSlide(post, index));
+      const buttons = journalPosts.map((post, index) => createJournalControl(post, index));
+      main.append(...slides);
+      controls.append(...buttons);
+
+      const activate = (nextIndex, focus = false) => {
+        slides.forEach((slide, index) => {
+          const selected = index === nextIndex;
+          slide.hidden = !selected;
+          buttons[index].setAttribute('aria-selected', String(selected));
+          buttons[index].tabIndex = selected ? 0 : -1;
+        });
+        if (focus) buttons[nextIndex].focus();
+      };
+
+      buttons.forEach((button, index) => {
+        button.addEventListener('click', () => activate(index));
+        button.addEventListener('keydown', (event) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const lastIndex = buttons.length - 1;
+          const nextIndex = event.key === 'Home' ? 0
+            : event.key === 'End' ? lastIndex
+              : (index + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
+          activate(nextIndex, true);
+        });
+      });
+      activate(0);
+      target.replaceChildren(main, controls);
     } catch (error) {
       console.error(error);
       target.innerHTML = '<p class="empty-state">記事を読み込めませんでした。</p>';
