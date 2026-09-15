@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">路地裏チャイニーズ 有馬</title>
+  <desc id="desc">店舗提供素材の受領後に差し替えるプレースホルダー</desc>
+  <rect width="1600" height="1000" fill="#123f43"/>
+  <path d="M0 760 420 420l260 210 300-300 620 520v150H0z" fill="#d6a75e" opacity=".22"/>
+  <path d="M0 860 380 540l230 170 330-260 660 520v30H0z" fill="#f5efe2" opacity=".12"/>
+  <text x="800" y="470" fill="#f5efe2" font-family="Yu Gothic, Hiragino Kaku Gothic ProN, sans-serif" font-size="82" text-anchor="middle" letter-spacing="8">路地裏チャイニーズ 有馬</text>
+  <text x="800" y="560" fill="#d6a75e" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" letter-spacing="6">ROJIURA CHINESE ARIMA</text>
+</svg>

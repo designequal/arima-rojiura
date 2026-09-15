@@ -4,12 +4,7 @@
 
 | ファイル | 種別 | 原典URL / 提供元 | 権利・許諾 | 加工 | 使用箇所 |
 |---|---|---|---|---|---|
-| `assets/images/hero.webp` | 店舗実写 | 未設定 | 未確認 | WebP変換予定 | Hero |
-| `assets/images/about.webp` | 店舗実写 | 未設定 | 未確認 | WebP変換予定 | About |
-| `assets/images/gallery-01.webp` | 店舗実写 | 未設定 | 未確認 | WebP変換予定 | Gallery |
-| `assets/images/gallery-02.webp` | 店舗実写 | 未設定 | 未確認 | WebP変換予定 | Gallery |
-| `assets/images/gallery-03.webp` | 店舗実写 | 未設定 | 未確認 | WebP変換予定 | Gallery |
-| `assets/images/ogp.webp` | OGP | 未設定 | 未確認 | WebP変換予定 | OGP |
+| `assets/images/placeholder.svg` | 仮のブランドプレースホルダー | このリポジトリで作成 | 実物ではない | 実素材受領後に差し替え | Hero / About / Gallery / Menu / OGP |
 
 ## 運用ルール
 

@@ -1,6 +1,6 @@
-# DesignEqual Restaurant Site Template
+# 路地裏チャイニーズ 有馬 公式サイト
 
-飲食店向け静的Webサイトの共通テンプレートです。店舗ごとの事実情報・ブランド資産を設定して利用します。
+`designequal/site-generate-template` をベースにした、路地裏チャイニーズ 有馬の静的Webサイトです。
 
 > **重要**: 推測した店舗情報、営業時間、住所、価格、メニュー、料理画像は掲載しません。`research.md` で確認できた情報だけを実装してください。
 
@@ -23,14 +23,20 @@
 - `deployment.md` — 公開手順
 - `changelog.md` — 変更履歴
 
-## テンプレート利用手順
+## 残り1つの設定
 
-1. `research.md` を埋め、公式情報と第三者媒体をクロスチェックする。
+店舗情報とサイト構成は設定済みです。Instagram同期を動かすには、GitHubの **Settings → Secrets and variables → Actions** に `INSTAGRAM_GRAPH_ACCESS_TOKEN` をSecretとして登録してください。トークンはファイルへ保存しません。
+
+登録後は **Actions → Sync Instagram posts → Run workflow** を実行すれば、公式Instagramの投稿と画像が `assets/data/instagram-posts.json` と `assets/images/instagram-feed/` に同期されます。
+
+## 更新手順
+
+1. `research.md` を更新し、公式情報と第三者媒体をクロスチェックする。
 2. `design.md` に店舗固有のブランド・配色・フォント・見出し改行を確定する。
-3. `index.html` の `STORE_*` トークンとJSON-LDを確認済みの実情報へ置換する。
+3. `index.html` とJSON-LDの店舗情報を確認する（初期設定済み）。
 4. `styles.css` のCSS変数をブランドに合わせる。
 5. 実写画像を `assets/images/` に保存し、`assets.md` に出典・利用箇所を記録する。
-6. 必要に応じてInstagram同期を設定する。
+6. 店舗提供素材を受領したら `assets/images/placeholder.svg` を実素材へ差し替える。
 7. 320 / 375 / 390 / 430 / 768 / 1024 / 1440pxで表示を確認する。
 
 ## ローカル確認
@@ -51,7 +57,7 @@ npx serve .
 
 ## Instagram記事の初回設定
 
-1. `config/instagram-journal.json` の対象アカウント設定を確認する。
+1. `config/instagram-journal.json` の対象アカウントは設定済みです。
 2. GitHubの **Settings → Secrets and variables → Actions** で、`INSTAGRAM_GRAPH_ACCESS_TOKEN` を登録する。
 3. Secret名が一覧にあるだけで完了にせず、`npm run check:instagram` または手動workflowで値が実行環境へ渡ることを確認する。
 4. **Actions → Sync Instagram posts → Run workflow** を一度実行する。

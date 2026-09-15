@@ -2,18 +2,18 @@
 
 ## 基本設定
 
-公開前に `STORE_*` トークンを実情報へ置換します。
+店舗情報と主要なSEO設定は反映済みです。
 
 | 項目 | 設定値 | 状態 |
 |---|---|---|
-| `<title>` | `STORE_NAME` | 未設定 |
-| meta description | `STORE_DESCRIPTION` | 未設定 |
-| canonical URL | `STORE_CANONICAL_URL` | 未設定 |
-| OGP title | `STORE_NAME` | 未設定 |
-| OGP description | `STORE_DESCRIPTION` | 未設定 |
-| OGP image | `assets/images/ogp.webp` | 未設定 |
+| `<title>` | 路地裏チャイニーズ 有馬 | 設定済み |
+| meta description | 大阪・福島の路地裏で楽しむ中華料理、餃子、居酒屋。 | 設定済み |
+| canonical URL | https://siu01.github.io/arima-rojiura-site/ | GitHub Pages公開時に確認 |
+| OGP title | 路地裏チャイニーズ 有馬 | 設定済み |
+| OGP description | 大阪・福島の路地裏で楽しむ中華料理、餃子、居酒屋。 | 設定済み |
+| OGP image | `assets/images/placeholder.svg` | 実素材に差し替え可能 |
 | Twitter card | `summary_large_image` | 設定済み |
-| favicon | 店舗ブランド資産を使用 | 未設定 |
+| favicon | 仮のテキストロゴSVG | 設定済み |
 
 ## 構造化データ
 
@@ -43,4 +43,4 @@
 - LighthouseでSEO / Accessibility / Best Practices / Performanceを確認
 - OGPの絶対URLと画像サイズを確認
 - 404となる画像・リンクがないことを確認
-- `STORE_` のテンプレートトークンが残っていないことを確認
+- 店舗情報の未設定トークンが残っていないことを確認

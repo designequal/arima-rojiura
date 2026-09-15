@@ -4,26 +4,26 @@
 
 ## 調査メタデータ
 
-- 調査日: `YYYY-MM-DD`
-- 調査担当: `NAME`
-- 対象店舗: `STORE_NAME`
-- Instagram: `STORE_INSTAGRAM_URL`
+- 調査日: `2026-09-15`
+- 調査担当: `Codex`
+- 対象店舗: `路地裏チャイニーズ 有馬`
+- Instagram: `https://www.instagram.com/arima_rojiura/`
 
 ## 店舗情報
 
 | 項目 | 確認済み情報 | 出典URL | 確認日 |
 |---|---|---|---|
-| 正式店名 | 未確認 | | |
-| 郵便番号 | 未確認 | | |
-| 住所 | 未確認 | | |
-| 電話番号 | 未確認 | | |
-| 営業時間 | 未確認 | | |
-| 定休日 | 未確認 | | |
-| 予約方法 | 未確認 | | |
-| 支払方法 | 未確認 | | |
-| 席数 | 未確認 | | |
-| 駐車場 | 未確認 | | |
-| アクセス | 未確認 | | |
+| 正式店名 | 路地裏チャイニーズ 有馬 | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
+| 郵便番号 | 〒553-0003 | https://www.chu-ka.com/shop/50024/ | 2026-09-15 |
+| 住所 | 大阪府大阪市福島区福島5-11-15 | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
+| 電話番号 | 06-7503-8915 | https://www.chu-ka.com/shop/50024/ | 2026-09-15 |
+| 営業時間 | 月〜土 17:00〜24:00（料理L.O.23:00／ドリンクL.O.23:30） | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
+| 定休日 | 日曜（臨時休業は要確認） | https://www.chu-ka.com/shop/50024/ | 2026-09-15 |
+| 予約方法 | TableCheck・電話 | https://www.tablecheck.com/ja/arima-rojiura | 2026-09-15 |
+| 支払方法 | カード不可、電子マネー可、QRコード決済可（PayPay） | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
+| 席数 | 14席（カウンター10席、BOX席1つ） | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
+| 駐車場 | 無 | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
+| アクセス | JR福島駅・阪神新福島駅から徒歩約3分 | https://tabelog.com/osaka/A2701/A270108/27092040/ | 2026-09-15 |
 
 ## メニュー
 
@@ -31,18 +31,18 @@
 
 | カテゴリ | 品名 | 価格 | 補足 | 出典URL | 確認日 |
 |---|---|---:|---|---|---|
-| | | | | | |
+| 最新メニュー | 内容・価格は店舗で確認 | https://www.instagram.com/arima_rojiura/ | 2026-09-15 |
 
 ## ブランド・コンセプトの根拠
 
-- 公式サイト:
-- Instagram:
-- Google Business Profile:
+- 公式サイト: なし（予約ポータル・Instagram）
+- Instagram: https://www.instagram.com/arima_rojiura/
+- Google Business Profile: https://www.google.com/maps/search/?api=1&query=路地裏チャイニーズ有馬%20大阪市福島区福島5-11-15
 - その他公式SNS:
-- 食べログ:
-- Retty:
-- ぐるなび:
-- ホットペッパー:
+- 食べログ: https://tabelog.com/osaka/A2701/A270108/27092040/
+- Retty: https://retty.me/area/PRE27/ARE618/SUB8903/100001277950/reports/
+- ぐるなび: 未確認
+- ホットペッパー: 未確認
 
 ## 画像候補
 
@@ -52,11 +52,11 @@
 
 ## 未確認事項
 
-- [ ] 正式な店舗表記
-- [ ] 営業時間・定休日
-- [ ] 電話番号
-- [ ] 住所
-- [ ] 予約URL
+- [x] 正式な店舗表記
+- [x] 営業時間・定休日
+- [x] 電話番号
+- [x] 住所
+- [x] 予約URL
 - [ ] メニュー・価格
 - [ ] Instagram転載許諾
 - [ ] 画像利用許諾

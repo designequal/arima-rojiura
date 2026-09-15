@@ -21,7 +21,7 @@ npx serve .
 ## 公開前チェック
 
 1. `research.md` の未確認事項を確認する。
-2. `index.html` / `posts.html` / `post.html` の `STORE_*` トークンを検索し、公開値へ置換する。
+2. `index.html` / `posts.html` / `post.html` の店舗情報を確認する（初期設定済み）。
 3. `assets.md` に記録した実画像を配置する。
 4. Restaurant JSON-LDを実情報へ更新する。
 5. 電話・予約・Instagram・地図リンクを実機で確認する。

@@ -303,7 +303,7 @@
       }
 
       target.replaceChildren(date, title, imagesWrap, caption, actions);
-      document.title = `${post.title || excerpt(post.caption, 40)} | STORE_NAME`;
+      document.title = `${post.title || excerpt(post.caption, 40)} | 路地裏チャイニーズ 有馬`;
     } catch (error) {
       console.error(error);
       target.innerHTML = '<p class="empty-state">記事を読み込めませんでした。</p>';
