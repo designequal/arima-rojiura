@@ -45,15 +45,18 @@ jobs:
           INSTAGRAM_GRAPH_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_GRAPH_ACCESS_TOKEN }}
         run: npm run sync:instagram
 
+      - name: Generate Instagram article pages
+        run: node tools/generate-instagram-pages.mjs
+
       - name: Commit changed archive
         shell: bash
         run: |
-          if git diff --quiet -- assets/data/instagram-posts.json assets/images/instagram-feed; then
+          if git diff --quiet -- assets/data/instagram-posts.json assets/images/instagram-feed && [ -z "$(git status --porcelain -- posts)" ]; then
             echo "No Instagram changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/data/instagram-posts.json assets/images/instagram-feed
+          git add assets/data/instagram-posts.json assets/images/instagram-feed posts
           git commit -m "chore: sync Instagram posts"
           git push

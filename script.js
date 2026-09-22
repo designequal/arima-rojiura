@@ -58,7 +58,7 @@
     article.className = 'post-card';
 
     const link = document.createElement('a');
-    link.href = `post.html?post=${encodeURIComponent(post.id)}`;
+    link.href = `posts/${encodeURIComponent(post.id)}.html`;
     link.setAttribute('aria-label', `${excerpt(post.title || post.caption, 70)}の記事を読む`);
 
     const imagePath = firstImage(post);
@@ -125,7 +125,7 @@
     description.textContent = excerpt(post.caption, 230);
     const link = document.createElement('a');
     link.className = 'journal-feature__link';
-    link.href = `post.html?post=${encodeURIComponent(post.id)}`;
+    link.href = `posts/${encodeURIComponent(post.id)}.html`;
     link.textContent = '投稿を読む';
     body.append(label, date, title, description, link);
     panel.append(imageWrap, body);
