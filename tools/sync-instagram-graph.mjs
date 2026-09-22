@@ -43,22 +43,36 @@ const fields = [
   'children{id,media_type,media_url,thumbnail_url}'
 ].join(',');
 
-const discoveryField = `business_discovery.username(${targetUsername}){id,username,media.limit(${Number(syncLimit)}){${fields}}}`;
-const apiUrl = new URL(`https://graph.facebook.com/${apiVersion}/${sourceInstagramUserId}`);
-apiUrl.searchParams.set('fields', discoveryField);
-apiUrl.searchParams.set('access_token', token);
+const requestedLimit = Math.min(Math.max(Number(process.env.INSTAGRAM_SYNC_LIMIT || syncLimit) || 100, 1), 100);
+const pageSize = Math.min(requestedLimit, 25);
+const fetchMediaPage = async (after) => {
+  const pagination = after ? `.after(${after})` : '';
+  const discoveryField = `business_discovery.username(${targetUsername}){id,username,media.limit(${pageSize})${pagination}{${fields}}}`;
+  const apiUrl = new URL(`https://graph.facebook.com/${apiVersion}/${sourceInstagramUserId}`);
+  apiUrl.searchParams.set('fields', discoveryField);
+  apiUrl.searchParams.set('access_token', token);
+  const apiResponse = await fetch(apiUrl, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(30_000) });
+  const apiJson = await apiResponse.json().catch(() => ({}));
+  if (!apiResponse.ok || apiJson?.error) {
+    const error = apiJson?.error;
+    const detail = error
+      ? `${error.type ?? 'Graph API error'}: ${error.message ?? 'unknown'} (code=${error.code ?? '?'})`
+      : `${apiResponse.status} ${apiResponse.statusText}`;
+    throw new Error(`Instagram Graph API error: ${detail}`);
+  }
+  return apiJson?.business_discovery?.media;
+};
 
-const apiResponse = await fetch(apiUrl, { headers: { accept: 'application/json' } });
-const apiJson = await apiResponse.json().catch(() => ({}));
-if (!apiResponse.ok || apiJson?.error) {
-  const error = apiJson?.error;
-  const detail = error
-    ? `${error.type ?? 'Graph API error'}: ${error.message ?? 'unknown'} (code=${error.code ?? '?'})`
-    : `${apiResponse.status} ${apiResponse.statusText}`;
-  throw new Error(`Instagram Graph API error: ${detail}`);
+const media = [];
+let after;
+while (media.length < requestedLimit) {
+  const page = await fetchMediaPage(after);
+  const pageItems = Array.isArray(page?.data) ? page.data : [];
+  media.push(...pageItems);
+  const nextAfter = page?.paging?.cursors?.after;
+  if (!nextAfter || pageItems.length < pageSize) break;
+  after = nextAfter;
 }
-
-const media = apiJson?.business_discovery?.media?.data;
 if (!Array.isArray(media) || media.length === 0) {
   throw new Error('Business Discoveryのmediaデータを取得できませんでした。対象が公開プロアカウントか確認してください。');
 }
@@ -76,9 +90,13 @@ if (!Array.isArray(existing)) {
 const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'instagram-sync-'));
 const staged = [];
 
+const imageSource = (mediaItem) => mediaItem?.media_type === 'VIDEO'
+  ? mediaItem.thumbnail_url || mediaItem.media_url
+  : mediaItem.media_url || mediaItem.thumbnail_url;
+
 const downloadAsWebp = async (url, filename) => {
   if (!url) throw new Error(`画像URLがありません: ${filename}`);
-  const response = await fetch(url);
+  const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
   if (!response.ok) throw new Error(`画像取得失敗 ${response.status}: ${filename}`);
   const buffer = Buffer.from(await response.arrayBuffer());
   const output = path.join(tmpDir, filename);
@@ -100,8 +118,8 @@ const incoming = [];
 for (const item of media) {
   const children = Array.isArray(item?.children?.data) ? item.children.data : [];
   const imageSources = children.length
-    ? children.map((child) => child.media_url || child.thumbnail_url).filter(Boolean)
-    : [item.media_url || item.thumbnail_url].filter(Boolean);
+    ? children.map(imageSource).filter(Boolean)
+    : [imageSource(item)].filter(Boolean);
 
   const images = [];
   for (let index = 0; index < imageSources.length; index += 1) {
